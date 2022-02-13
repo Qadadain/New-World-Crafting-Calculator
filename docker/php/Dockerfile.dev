@@ -1,0 +1,64 @@
+FROM php:8.1.2-fpm
+
+USER root
+
+WORKDIR /
+
+# Install dependencies
+RUN apt-get update \
+	# gd
+	&& apt-get install -y --no-install-recommends build-essential  openssl nginx libfreetype6-dev libjpeg-dev libpng-dev libwebp-dev zlib1g-dev libzip-dev gcc g++ make vim unzip curl git jpegoptim optipng pngquant gifsicle locales libonig-dev nodejs npm \
+	&& docker-php-ext-configure gd  \
+	&& docker-php-ext-install gd \
+    && apt-get install -y libicu-dev \
+    && docker-php-ext-configure intl \
+    && docker-php-ext-install intl \
+	# gmp
+	&& apt-get install -y --no-install-recommends libgmp-dev \
+	&& docker-php-ext-install gmp \
+	# pdo_mysql
+	&& docker-php-ext-install pdo_mysql mbstring \
+	# pdo
+	&& docker-php-ext-install pdo \
+	# opcache
+	&& docker-php-ext-enable opcache \
+	# zip
+	&& docker-php-ext-install zip \
+	&& apt-get autoclean -y \
+	&& rm -rf /var/lib/apt/lists/* \
+	&& rm -rf /tmp/pear/ \
+    && apt-get update \
+    && apt-get install -y wget gpg apt-utils
+
+RUN apt update && apt install --no-install-recommends --assume-yes xfonts-75dpi fontconfig libjpeg62-turbo-dev libx11-6 libxcb1 libxext6 libzip-dev libxrender1 xfonts-base libpng-dev libjpeg-dev wget
+
+
+RUN apt-get install -y default-mysql-client
+
+COPY ./ /var/www/html/
+
+WORKDIR /var/www/html
+
+RUN cp .env .env.local && ls -a && cat .env.local
+
+RUN echo 'DATABASE_URL="mysql://root:rootroot@db:3306/NWCC?serverVersion=5.7"' >> .env.local && cat .env.local
+
+WORKDIR /
+
+# Copy files
+COPY ./docker/local.ini /usr/local/etc/php/conf.d/local.ini
+
+COPY ./docker/conf.d/nginx.dev.conf /etc/nginx/nginx.conf
+
+COPY ./docker/script/init.sh /init.sh
+RUN chmod +x /init.sh
+ENTRYPOINT ["/init.sh"]
+
+EXPOSE 8080
+RUN nginx -t
+
+COPY ./docker/script/post_deploy.sh /post_deploy.sh
+RUN ["chmod", "+x", "post_deploy.sh"]
+
+CMD [ "sh", "./post_deploy.sh" ]
+
