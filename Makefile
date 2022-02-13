@@ -42,6 +42,8 @@ bdd: ## Reset BDD
 	docker-compose exec web bash -c "php bin/console doctrine:migration:migrate --no-interaction"
 	docker-compose exec web bash -c "php bin/console doctrine:fixtures:load --no-interaction"
 
+purge: ## Clean css un /public/app.css
+	npx tailwindcss -i ./assets/scss/app.scss -o ./public/build/app.css
 
 
 ##
