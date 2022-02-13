@@ -37,10 +37,10 @@ fixtures: ## Run fixtures
 	docker-compose exec web bash -c "php /var/www/html/bin/console doctrine:fixtures:load --no-interaction"
 
 bdd: ## Reset BDD
-	docker-compose exec web bash -c "php bin/console doctrine:database:drop --force --no-interaction"
-	docker-compose exec web bash -c "php bin/console doctrine:database:create --no-interaction"
-	docker-compose exec web bash -c "php bin/console doctrine:migration:migrate --no-interaction"
-	docker-compose exec web bash -c "php bin/console doctrine:fixtures:load --no-interaction"
+	docker-compose exec web bash -c "php /var/www/html/bin/console doctrine:database:drop --force --no-interaction"
+	docker-compose exec web bash -c "php /var/www/html/bin/console doctrine:database:create --no-interaction"
+	docker-compose exec web bash -c "php /var/www/html/bin/console doctrine:migration:migrate --no-interaction"
+	docker-compose exec web bash -c "php /var/www/html/bin/console doctrine:fixtures:load --no-interaction"
 
 purge: ## Clean css un /public/app.css
 	npx tailwindcss -i ./assets/scss/app.scss -o ./public/build/app.css
