@@ -25,7 +25,7 @@ class TradeSkill
     #[ORM\JoinColumn(nullable: false)]
     private $type;
 
-    #[ORM\OneToMany(mappedBy: 'tradeSkill', targetEntity: Component::class)]
+    #[ORM\OneToMany(mappedBy: 'tradeSkill', targetEntity: Component::class,  cascade: ['persist', 'remove'])]
     private $components;
 
     public function __construct()
