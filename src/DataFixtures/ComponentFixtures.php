@@ -3,8 +3,11 @@
 namespace App\DataFixtures;
 
 use App\Entity\Component;
+use App\Entity\Recipe;
+use App\Entity\StepRecipe;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ObjectManager;
 
 class ComponentFixtures extends Fixture  implements DependentFixtureInterface
@@ -39,12 +42,8 @@ class ComponentFixtures extends Fixture  implements DependentFixtureInterface
             'name' => 'Lingot de fer',
             'tradeSkill' => 7
         ],
-        [
-            'name' => 'Lingot de métal stellaire',
-            'tradeSkill' => 7
-        ],
-
     ];
+
     public function load(ObjectManager $manager): void
     {
         foreach (self::COMPONENT as $data) {
@@ -54,6 +53,7 @@ class ComponentFixtures extends Fixture  implements DependentFixtureInterface
 
             $manager->persist($component);
         }
+
         $manager->flush();
     }
 }
