@@ -3,5 +3,17 @@
 {% block title %}Hello HomeController!{% endblock %}
 
 {% block body %}
-
+    <div class="flex">
+    {% for tradeSkillType in tradeSkillTypes %}
+        <div>
+            <p>{{ tradeSkillType.name }}</p>
+                <div class="flex flex-col">
+            {% for tradeSkill in tradeSkillType.tradeSkills %}
+                    <p>{{ tradeSkill.name }}</p>
+                    <br>
+            {% endfor %}
+                </div>
+        </div>
+    {% endfor %}
+    </div>
 {% endblock %}
