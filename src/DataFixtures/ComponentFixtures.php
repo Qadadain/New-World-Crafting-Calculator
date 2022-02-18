@@ -9,9 +9,17 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class ComponentFixtures extends Fixture  implements DependentFixtureInterface
 {
+    protected $slugger;
+
+    public function __construct(SluggerInterface $slugger)
+    {
+        $this->slugger = $slugger;
+    }
+
     public function getDependencies(): array
     {
         return [TradeSkillFixtures::class];
@@ -50,6 +58,7 @@ class ComponentFixtures extends Fixture  implements DependentFixtureInterface
             $component = new Component();
             $component->setName($data['name']);
             $component->setTradeSkill($manager->find('App:TradeSkill', $data['tradeSkill']));
+            $component->setSlug(strtolower($this->slugger->slug($component->getName())));
 
             $manager->persist($component);
         }
