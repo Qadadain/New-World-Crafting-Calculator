@@ -28,6 +28,9 @@ class TradeSkill
     #[ORM\OneToMany(mappedBy: 'tradeSkill', targetEntity: Component::class,  cascade: ['persist', 'remove'])]
     private $components;
 
+    #[ORM\Column(type: 'string', length: 255)]
+    private $slug;
+
     public function __construct()
     {
         $this->components = new ArrayCollection();
@@ -100,6 +103,18 @@ class TradeSkill
                 $component->setTradeSkill(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

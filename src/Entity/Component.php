@@ -27,6 +27,9 @@ class Component
     #[ORM\OneToMany(mappedBy: 'ingredient', targetEntity: StepRecipe::class)]
     private $stepRecipes;
 
+    #[ORM\Column(type: 'string', length: 255)]
+    private $slug;
+
     public function __construct()
     {
         $this->stepRecipes = new ArrayCollection();
@@ -109,6 +112,18 @@ class Component
                 $stepRecipe->setIngredient(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

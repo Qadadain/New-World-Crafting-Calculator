@@ -6,9 +6,17 @@ use App\Entity\TradeSkill;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class TradeSkillFixtures extends Fixture implements DependentFixtureInterface
 {
+    protected $slugger;
+
+    public function __construct(SluggerInterface $slugger)
+    {
+        $this->slugger = $slugger;
+    }
+
     public function getDependencies(): array
     {
         return [TradeSkillTypeFixtures::class];
@@ -93,6 +101,7 @@ class TradeSkillFixtures extends Fixture implements DependentFixtureInterface
             $skillTrade->setName($data['name'])
                 ->setImage('toto');
             $skillTrade->setType($manager->find('App:TradeSkillType', $data['type']));
+            $skillTrade->setSlug(strtolower($this->slugger->slug($skillTrade->getName())));
 
             $manager->persist($skillTrade);
         }

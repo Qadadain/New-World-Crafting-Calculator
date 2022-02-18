@@ -24,6 +24,9 @@ class Recipe
     #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: StepRecipe::class,  cascade: ['persist', 'remove'])]
     private $stepsRecipe;
 
+    #[ORM\Column(type: 'string', length: 255)]
+    private $slug;
+
     public function __construct()
     {
         $this->stepsRecipe = new ArrayCollection();
@@ -84,6 +87,18 @@ class Recipe
                 $stepsRecipe->setRecipe(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

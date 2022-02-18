@@ -8,9 +8,17 @@ use App\Entity\StepRecipe;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class RecipeFixtures extends Fixture implements DependentFixtureInterface
 {
+    protected $slugger;
+
+    public function __construct(SluggerInterface $slugger)
+    {
+        $this->slugger = $slugger;
+    }
+
     public function getDependencies(): array
     {
         return [TradeSkillFixtures::class, ComponentFixtures::class];
@@ -24,6 +32,7 @@ class RecipeFixtures extends Fixture implements DependentFixtureInterface
 
         $starmetalIngotRecipe = new Recipe();
         $starmetalIngotRecipe->setName('Lingot de métal stellaire');
+        $starmetalIngotRecipe->setSlug(strtolower($this->slugger->slug($starmetalIngotRecipe->getName())));
 
         $stepStarmetalOre = new StepRecipe();
         $stepStarmetalOre->setIngredient($starmetalOre)
@@ -42,6 +51,8 @@ class RecipeFixtures extends Fixture implements DependentFixtureInterface
         $starmetalIngotRecipe->addStepsRecipe( $stepStarmetalOre);
         $starmetalIngotComponent = new Component();
         $starmetalIngotComponent->setName($starmetalIngotRecipe->getName());
+        $starmetalIngotComponent->setSlug(strtolower($this->slugger->slug($starmetalIngotRecipe->getName())));
+
         $starmetalIngotRecipe->setIngredient($starmetalIngotComponent);
         $starmetalIngotComponent->setRecipe($starmetalIngotRecipe)
             ->setTradeSkill($manager->find('App:TradeSkill', 7));
