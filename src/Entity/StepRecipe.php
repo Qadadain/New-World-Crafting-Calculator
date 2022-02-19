@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\StepRecipeRepository;
 use Doctrine\ORM\Mapping as ORM;
+use JetBrains\PhpStorm\Pure;
 
 #[ORM\Entity(repositoryClass: StepRecipeRepository::class)]
 class StepRecipe

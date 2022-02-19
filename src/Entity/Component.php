@@ -6,6 +6,7 @@ use App\Repository\ComponentRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use JetBrains\PhpStorm\Pure;
 
 #[ORM\Entity(repositoryClass: ComponentRepository::class)]
 class Component
@@ -51,6 +52,12 @@ class Component
 
         return $this;
     }
+
+    #[Pure] public function __toString()
+    {
+        return $this->getName();
+    }
+
 
     public function getTradeSkill(): ?TradeSkill
     {

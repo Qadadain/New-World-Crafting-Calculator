@@ -9,7 +9,7 @@
             <p>{{ tradeSkillType.name }}</p>
                 <div class="flex flex-col">
             {% for tradeSkill in tradeSkillType.tradeSkills %}
-                    <p>{{ tradeSkill.name }}</p>
+                <a href="{{ path('home_tradeSkill', {'slug': tradeSkill.slug}) }}">{{ tradeSkill.name }}</a>
                     <br>
             {% endfor %}
                 </div>
