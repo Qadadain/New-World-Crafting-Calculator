@@ -19,6 +19,18 @@ class StepRecipeRepository extends ServiceEntityRepository
         parent::__construct($registry, StepRecipe::class);
     }
 
+    public function getSortIngredients($id)
+    {
+
+        return $this->createQueryBuilder('st')
+            ->select( 'st')
+            ->innerJoin('st.ingredient', 'c')
+            ->andWhere('st.recipe = :recipe')
+            ->setParameter('recipe', $id)
+            ->addOrderBy('c.name', 'ASC')
+            ->getQuery()->getResult();
+    }
+
     // /**
     //  * @return StepRecipe[] Returns an array of StepRecipe objects
     //  */

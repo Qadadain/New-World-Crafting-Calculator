@@ -28,27 +28,27 @@ class ComponentFixtures extends Fixture  implements DependentFixtureInterface
     public const COMPONENT = [
         [
             'name' => 'Minerai de fer',
-            'tradeSkill' => 13
+            'tradeSkill' => 14
         ],
         [
             'name' => 'Minerai de métal stellaire',
-            'tradeSkill' => 13
+            'tradeSkill' => 14
         ],
         [
             'name' => 'Bois vert',
-            'tradeSkill' => 12
+            'tradeSkill' => 13
         ],
         [
             'name' => 'Charbon de bois',
-            'tradeSkill' => 7
+            'tradeSkill' => 8
         ],
         [
-            'name' => 'lingot d\'acier',
-            'tradeSkill' => 7
+            'name' => 'Lingot d\'acier',
+            'tradeSkill' => 8
         ],
         [
             'name' => 'Lingot de fer',
-            'tradeSkill' => 7
+            'tradeSkill' => 8
         ],
     ];
 

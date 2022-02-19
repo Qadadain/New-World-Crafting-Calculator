@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div>
+        <h1 class="text-center">{% for component in components | slice(1,1) %}
+                {{ component.tradeSkill.name }}
+            {% endfor %}
+        </h1>
+    </div>
+    {% for component in components %}
+        <a href="{{ path('component_show', {'slug': component.slug}) }}">{{ component.name }}</a>
+        {% if component.recipe.stepsRecipe | default('undefined') %}
+            <br>
+            {% for recipe in component.recipe.stepsRecipe | default('undefined') %}
+                {{ recipe.ingredient }} x {{ recipe.quantity }}
+            {% endfor %}
+        {% endif %}
+        <br>
+    {% endfor %}
+{% endblock %}
