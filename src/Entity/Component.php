@@ -55,7 +55,7 @@ class Component
 
     #[Pure] public function __toString()
     {
-        return $this->getName();
+        return $this->name;
     }
 
 

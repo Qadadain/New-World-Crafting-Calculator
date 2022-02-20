@@ -50,6 +50,30 @@ class ComponentFixtures extends Fixture  implements DependentFixtureInterface
             'name' => 'Lingot de fer',
             'tradeSkill' => 8
         ],
+        [
+            'name' => 'Lingot de métal stellaire',
+            'tradeSkill' => 8
+        ],
+        [
+            'name' => 'Brûlepeau',
+            'tradeSkill' => 17
+        ],
+        [
+            'name' => 'Marquepeau',
+            'tradeSkill' => 17
+        ],
+        [
+            'name' => 'Tanin',
+            'tradeSkill' => 10
+        ],
+        [
+            'name' => 'Cuir runique',
+            'tradeSkill' => 10
+        ],
+        [
+            'name' => 'Cuir Imprégné',
+            'tradeSkill' => 10
+        ],
     ];
 
     public function load(ObjectManager $manager): void

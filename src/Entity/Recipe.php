@@ -18,9 +18,6 @@ class Recipe
     #[ORM\OneToOne(inversedBy: 'recipe', targetEntity: Component::class, cascade: ['persist', 'remove'])]
     private $ingredient;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    private $name;
-
     #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: StepRecipe::class, cascade: ['persist', 'remove'])]
     private $stepsRecipe;
 
@@ -49,21 +46,9 @@ class Recipe
         return $this;
     }
 
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
     public function __toString(): string
     {
-        return $this->getName();
+        return $this->getIngredient()->getName();
     }
 
     /**

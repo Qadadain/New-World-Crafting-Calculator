@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 
-use App\Entity\Component;
 use App\Entity\TradeSkill;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
