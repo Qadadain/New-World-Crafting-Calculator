@@ -22,6 +22,7 @@ class TradeSkillCrudController extends AbstractCrudController
         return [
             IdField::new('id')->hideOnForm(),
             TextField::new('name', 'Nom'),
+            TextField::new('image'),
             AssociationField::new('type'),
             SlugField::new('slug')->setTargetFieldName('name')
         ];

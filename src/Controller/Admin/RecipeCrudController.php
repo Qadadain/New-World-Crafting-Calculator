@@ -25,7 +25,7 @@ class RecipeCrudController extends AbstractCrudController
             IdField::new('id')->hideOnForm(),
             AssociationField::new('ingredient', 'Nom'),
             AssociationField::new('stepsRecipe', 'Nombre de composant')->hideOnForm(),
-            SlugField::new('slug', 'Slug')->setTargetFieldName('name')->hideOnForm(),
+            TextField::new('slug', 'Slug'),
         ];
     }
 
@@ -34,6 +34,6 @@ class RecipeCrudController extends AbstractCrudController
         return $crud
 
             ->setPageTitle('index', 'Recettes')
-            ->setSearchFields(['id', 'ingredient', 'stepsRecipe', 'slug']);
+            ->setSearchFields(['id', 'ingredient.name', 'stepsRecipe', 'slug']);
     }
 }
