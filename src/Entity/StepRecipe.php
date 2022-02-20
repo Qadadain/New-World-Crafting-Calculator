@@ -23,6 +23,11 @@ class StepRecipe
     #[ORM\Column(type: 'integer')]
     private $quantity;
 
+    public function __toString(): string
+    {
+       return $this->getIngredient()->getName();
+    }
+
     public function getId(): ?int
     {
         return $this->id;

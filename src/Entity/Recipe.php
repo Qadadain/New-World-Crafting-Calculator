@@ -21,7 +21,7 @@ class Recipe
     #[ORM\Column(type: 'string', length: 255)]
     private $name;
 
-    #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: StepRecipe::class,  cascade: ['persist', 'remove'])]
+    #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: StepRecipe::class, cascade: ['persist', 'remove'])]
     private $stepsRecipe;
 
     #[ORM\Column(type: 'string', length: 255)]
@@ -59,6 +59,11 @@ class Recipe
         $this->name = $name;
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->getName();
     }
 
     /**
