@@ -31,6 +31,11 @@ class TradeSkill
     #[ORM\Column(type: 'string', length: 255)]
     private $slug;
 
+    public function __toString(): string
+    {
+        return $this->getName();
+    }
+
     public function __construct()
     {
         $this->components = new ArrayCollection();

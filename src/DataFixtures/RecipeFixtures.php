@@ -31,8 +31,8 @@ class RecipeFixtures extends Fixture implements DependentFixtureInterface
         $steelMetal = $manager->find('App:Component', 5);
 
         $starmetalIngotRecipe = new Recipe();
-        $starmetalIngotRecipe->setName('Lingot de métal stellaire');
-        $starmetalIngotRecipe->setSlug(strtolower($this->slugger->slug($starmetalIngotRecipe->getName())));
+        $starmetalIngotRecipe->setIngredient($manager->find('App:Component', 7));
+        $starmetalIngotRecipe->setSlug(strtolower($this->slugger->slug($starmetalIngotRecipe->getIngredient()->getName())));
 
         $stepStarmetalOre = new StepRecipe();
         $stepStarmetalOre->setIngredient($starmetalOre)
@@ -49,12 +49,9 @@ class RecipeFixtures extends Fixture implements DependentFixtureInterface
         $starmetalIngotRecipe->addStepsRecipe($stepSteelMetal);
         $starmetalIngotRecipe->addStepsRecipe($stepCharcoal);
         $starmetalIngotRecipe->addStepsRecipe( $stepStarmetalOre);
-        $starmetalIngotComponent = new Component();
-        $starmetalIngotComponent->setName($starmetalIngotRecipe->getName());
-        $starmetalIngotComponent->setSlug(strtolower($this->slugger->slug($starmetalIngotRecipe->getName())));
 
-        $starmetalIngotRecipe->setIngredient($starmetalIngotComponent);
-        $starmetalIngotComponent->setRecipe($starmetalIngotRecipe)
+
+        $starmetalIngotComponent = $manager->find('App:Component', 7)->setRecipe($starmetalIngotRecipe)
             ->setTradeSkill($manager->find('App:TradeSkill', 8));
 
         $starmetalOre->addStepRecipe($stepStarmetalOre);

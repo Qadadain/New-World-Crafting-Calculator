@@ -18,12 +18,17 @@ class TradeSkillType
     #[ORM\Column(type: 'string', length: 255)]
     private $name;
 
-    #[ORM\OneToMany(mappedBy: 'type', targetEntity: TradeSkill::class,  cascade: ['persist', 'remove'])]
+    #[ORM\OneToMany(mappedBy: 'type', targetEntity: TradeSkill::class, cascade: ['persist', 'remove'])]
     private $tradeSkills;
 
     public function __construct()
     {
         $this->tradeSkills = new ArrayCollection();
+    }
+
+    public function __toString(): string
+    {
+        return $this->getName();
     }
 
     public function getId(): ?int
