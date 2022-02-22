@@ -2,9 +2,15 @@ vich_uploader:
     db_driver: orm
     storage: flysystem
     mappings:
-        image_ingredient:
-            uri_prefix: '%image_ingredient%'
-            upload_destination: default.storage
+        image_composants:
+            uri_prefix: '%image_composants%'
+            upload_destination: composant.storage
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+            delete_on_update: true
+            delete_on_remove: true
+        image_metiers:
+            uri_prefix: '%image_metiers%'
+            upload_destination: metier.storage
             namer: Vich\UploaderBundle\Naming\UniqidNamer
             delete_on_update: true
             delete_on_remove: true

@@ -29,7 +29,7 @@ class ComponentCrudController extends AbstractCrudController
                 ->setFormType(VichImageType::class)
                 ->onlyOnForms(),
             ImageField::new('imageName', 'Fichier')
-                ->setBasePath('/images/ingredient/')
+                ->setBasePath('/images/composants/')
                 ->hideOnForm(),
             AssociationField::new('recipe', 'Recette'),
             AssociationField::new('tradeSkill', 'Métier'),

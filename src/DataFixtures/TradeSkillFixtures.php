@@ -98,8 +98,7 @@ class TradeSkillFixtures extends Fixture implements DependentFixtureInterface
     {
         foreach (self::TRADE_SKILL as $data) {
             $skillTrade = new TradeSkill();
-            $skillTrade->setName($data['name'])
-                ->setImage('toto');
+            $skillTrade->setName($data['name']);
             $skillTrade->setType($manager->find('App:TradeSkillType', $data['type']));
             $skillTrade->setSlug(strtolower($this->slugger->slug($skillTrade->getName())));
 

@@ -37,7 +37,7 @@ class Component
     /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
      */
-    #[Vich\UploadableField(mapping: 'image_ingredient', fileNameProperty: 'imageName')]
+    #[Vich\UploadableField(mapping: 'image_composants', fileNameProperty: 'imageName')]
     private ?File $imageFile = null;
 
     #[ORM\Column(type: 'string', nullable: true)]
