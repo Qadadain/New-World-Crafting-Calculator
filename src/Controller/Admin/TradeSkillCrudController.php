@@ -7,8 +7,10 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class TradeSkillCrudController extends AbstractCrudController
 {
@@ -22,7 +24,12 @@ class TradeSkillCrudController extends AbstractCrudController
         return [
             IdField::new('id')->hideOnForm(),
             TextField::new('name', 'Nom'),
-            TextField::new('image'),
+            TextField::new('imageFile', 'Upload')
+                ->setFormType(VichImageType::class)
+                ->onlyOnForms(),
+            ImageField::new('imageName', 'Fichier')
+                ->setBasePath('/images/metiers/')
+                ->hideOnForm(),
             AssociationField::new('type'),
             SlugField::new('slug')->setTargetFieldName('name')
         ];
