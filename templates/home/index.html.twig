@@ -9,7 +9,10 @@
             <p>{{ tradeSkillType.name }}</p>
                 <div class="flex flex-col">
             {% for tradeSkill in tradeSkillType.tradeSkills %}
-                <a href="{{ path('home_tradeSkill', {'slug': tradeSkill.slug}) }}">{{ tradeSkill.name }}</a>
+                <div>
+                    <img src="{{ vich_uploader_asset(tradeSkill, 'imageFile') }}" alt="{{ tradeSkill.imageName }}" />
+                    <a href="{{ path('home_tradeSkill', {'slug': tradeSkill.slug}) }}">{{ tradeSkill.name }}</a>
+                </div>
                     <br>
             {% endfor %}
                 </div>
